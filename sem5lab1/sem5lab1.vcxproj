@@ -139,12 +139,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Cone.cpp" />
+    <ClCompile Include="Figure.cpp" />
+    <ClCompile Include="FlatFigure.cpp" />
+    <ClCompile Include="Keeper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rectangle.cpp" />
+    <ClCompile Include="RectangularPrism.cpp" />
+    <ClCompile Include="Sphere.cpp" />
+    <ClCompile Include="Triangle.cpp" />
+    <ClCompile Include="VolumeFigure.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="Cone.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="FlatFigure.h" />
     <ClInclude Include="Keeper.h" />
+    <ClInclude Include="Rectangle.h" />
+    <ClInclude Include="RectangularPrism.h" />
+    <ClInclude Include="Sphere.h" />
+    <ClInclude Include="Triangle.h" />
     <ClInclude Include="VolumeFigure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
