@@ -2,66 +2,78 @@
 #include <fstream>
 #include <iostream>
 
-Keeper::Keeper() {}
+Keeper::Keeper() : capacity(10), size(0), figures(new std::unique_ptr<Figure>[capacity]) {}
 
-Keeper::~Keeper() {}
+Keeper::~Keeper() {
+    // Обеспечиваем автоматическое удаление объектов при удалении std::unique_ptr
+}
 
 void Keeper::addFigure(std::unique_ptr<Figure> figure) {
-    figures.push_back(std::move(figure));
-}
-
-void Keeper::saveToFile(const std::string& filename) const {
-    std::ofstream file(filename, std::ios::binary);
-    if (file.is_open()) {
-        size_t count = figures.size();
-        file.write(reinterpret_cast<const char*>(&count), sizeof(count));
-
-        for (const auto& figure : figures) {
-            figure->saveToFile(file);
-        }
-
-        std::cout << "Figures saved to file: " << filename << std::endl;
+    if (size == capacity) {
+        resize();
     }
-    else {
-        std::cerr << "Error opening file for writing: " << filename << std::endl;
-    }
-}
-
-void Keeper::loadFromFile(const std::string& filename) {
-    std::ifstream file(filename, std::ios::binary);
-    if (file.is_open()) {
-        figures.clear();
-
-        size_t count;
-        file.read(reinterpret_cast<char*>(&count), sizeof(count));
-
-        for (size_t i = 0; i < count; ++i) {
-            std::unique_ptr<Figure> figure = Figure::loadFromFile(file);
-            if (figure) {
-                figures.push_back(std::move(figure));
-            }
-        }
-
-        std::cout << "Figures loaded from file: " << filename << std::endl;
-    }
-    else {
-        std::cerr << "Error opening file for reading: " << filename << std::endl;
-    }
+    figures[size++] = std::move(figure);
 }
 
 void Keeper::printAllFiguresInfo() const {
-    for (size_t i = 0; i < figures.size(); ++i) {
-        std::cout << "Figure " << i + 1 << ":\n";
+    for (int i = 0; i < size; ++i) {
         figures[i]->printInfo();
     }
 }
 
+void Keeper::saveToFile(const std::string& filename) const {
+    std::ofstream file(filename, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open the file for writing.\n";
+        return;
+    }
+
+    file.write(reinterpret_cast<const char*>(&size), sizeof(size));
+    for (int i = 0; i < size; ++i) {
+        figures[i]->saveToFile(file);
+    }
+
+    file.close();
+}
+
+void Keeper::loadFromFile(const std::string& filename) {
+    std::ifstream file(filename, std::ios::binary);
+    if (!file.is_open()) {
+        std::cerr << "Error: Could not open the file for reading.\n";
+        return;
+    }
+
+    file.read(reinterpret_cast<char*>(&size), sizeof(size));
+    if (size > capacity) {
+        figures = std::make_unique<std::unique_ptr<Figure>[]>(size);
+        capacity = size;
+    }
+
+    for (int i = 0; i < size; ++i) {
+        figures[i] = Figure::loadFromFile(file);
+    }
+
+    file.close();
+}
+
 void Keeper::removeFigure(int index) {
-    if (index >= 0 && index < figures.size()) {
-        figures.erase(figures.begin() + index);
+    if (index >= 0 && index < size) {
+        for (int i = index; i < size - 1; ++i) {
+            figures[i] = std::move(figures[i + 1]);
+        }
+        --size;
     }
 }
 
 int Keeper::getFigureCount() const {
-    return figures.size();
+    return size;
+}
+
+void Keeper::resize() {
+    capacity *= 2;
+    auto newFigures = std::make_unique<std::unique_ptr<Figure>[]>(capacity);
+    for (int i = 0; i < size; ++i) {
+        newFigures[i] = std::move(figures[i]);
+    }
+    figures = std::move(newFigures);
 }

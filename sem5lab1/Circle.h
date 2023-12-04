@@ -17,4 +17,3 @@ public:
     static std::unique_ptr<Figure> loadFromFile(std::ifstream& file);
 };
 #endif
-

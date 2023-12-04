@@ -202,6 +202,7 @@ int main() {
         }
 
         case 4:
+            std::cout << "\nAll figures: \n";
             keeper.printAllFiguresInfo();
             break;
 

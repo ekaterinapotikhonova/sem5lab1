@@ -81,4 +81,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="figures_full.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+    <Text Include="figures_empty.txt">
+      <Filter>Исходные файлы</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

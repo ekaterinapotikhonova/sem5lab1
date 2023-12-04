@@ -1,9 +1,10 @@
+// Keeper.h
+
 #ifndef KEEPER_H
 #define KEEPER_H
 
-#include <vector>
-#include <memory>
 #include "Figure.h"
+#include <memory>
 
 class Keeper {
 public:
@@ -11,16 +12,18 @@ public:
     ~Keeper();
 
     void addFigure(std::unique_ptr<Figure> figure);
-    int getFigureCount() const;
-    void removeFigure(int index);
-
+    void printAllFiguresInfo() const;
     void saveToFile(const std::string& filename) const;
     void loadFromFile(const std::string& filename);
-
-    void printAllFiguresInfo() const;
+    void removeFigure(int index);
+    int getFigureCount() const;
 
 private:
-    std::vector<std::unique_ptr<Figure>> figures;
+    void resize();
+
+    int capacity;
+    int size;
+    std::unique_ptr<std::unique_ptr<Figure>[]> figures;
 };
 
-#endif
+#endif // KEEPER_H
