@@ -4,7 +4,7 @@
 RectangularPrism::RectangularPrism(double l, double w, double h) : length(l), width(w), height(h) {}
 
 void RectangularPrism::printInfo() const {
-    std::cout << "Rectangular Prism with length: " << length << ", width: " << width << ", and height: " << height << std::endl;
+    std::cout << "Rectangular Prism with length " << length << ", width " << width << ", and height " << height << ", Volume: " << calculateVolume() << std::endl;
 }
 
 double RectangularPrism::calculateArea() const {
@@ -16,9 +16,7 @@ double RectangularPrism::calculateVolume() const {
 }
 
 void RectangularPrism::saveToFile(std::ofstream& file) const {
-    file.write(reinterpret_cast<const char*>(&length), sizeof(length));
-    file.write(reinterpret_cast<const char*>(&width), sizeof(width));
-    file.write(reinterpret_cast<const char*>(&height), sizeof(height));
+    file << "RectangularPrism with length " << length << ", width " << width << " and height " << height << ", Volume: " << calculateVolume() << std::endl;
 }
 
 std::unique_ptr<Figure> RectangularPrism::loadFromFile(std::ifstream& file) {

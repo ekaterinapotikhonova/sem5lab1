@@ -82,10 +82,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="figures_full.txt">
+    <Text Include="f.txt">
       <Filter>Исходные файлы</Filter>
     </Text>
-    <Text Include="figures_empty.txt">
+    <Text Include="e.txt">
       <Filter>Исходные файлы</Filter>
     </Text>
   </ItemGroup>

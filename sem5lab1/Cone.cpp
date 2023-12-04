@@ -5,7 +5,7 @@
 Cone::Cone(double r, double h) : radius(r), height(h) {}
 
 void Cone::printInfo() const {
-    std::cout << "Cone with radius: " << radius << " and height: " << height << std::endl;
+    std::cout << "Cone with radius " << radius << " and height " << height << ", Volume: " << calculateVolume() << std::endl;
 }
 
 double Cone::calculateArea() const {
@@ -18,8 +18,7 @@ double Cone::calculateVolume() const {
 }
 
 void Cone::saveToFile(std::ofstream& file) const {
-    file.write(reinterpret_cast<const char*>(&radius), sizeof(radius));
-    file.write(reinterpret_cast<const char*>(&height), sizeof(height));
+    file << "Cone with radius " << radius << " and height " << height << ", Volume: " << calculateVolume() << std::endl;
 }
 
 std::unique_ptr<Figure> Cone::loadFromFile(std::ifstream& file) {

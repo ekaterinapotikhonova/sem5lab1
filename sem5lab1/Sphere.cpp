@@ -16,7 +16,7 @@ double Sphere::calculateVolume() const {
 }
 
 void Sphere::saveToFile(std::ofstream& file) const {
-    file.write(reinterpret_cast<const char*>(&radius), sizeof(radius));
+    file << "Sphere with radius " << radius << ", Volume: " << calculateVolume() << std::endl;
 }
 
 std::unique_ptr<Figure> Sphere::loadFromFile(std::ifstream& file) {

@@ -1,5 +1,3 @@
-// Keeper.h
-
 #ifndef KEEPER_H
 #define KEEPER_H
 

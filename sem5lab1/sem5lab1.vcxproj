@@ -164,8 +164,8 @@
     <ClInclude Include="VolumeFigure.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="figures_empty.txt" />
-    <Text Include="figures_full.txt" />
+    <Text Include="e.txt" />
+    <Text Include="f.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

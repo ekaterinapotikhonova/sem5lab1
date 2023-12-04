@@ -1,10 +1,12 @@
+// Circle.cpp
+
 #include "Circle.h"
 #include <iostream>
 
-Circle::Circle(double r) : radius(r) {}
+Circle::Circle(double radius) : radius(radius) {}
 
 void Circle::printInfo() const {
-    std::cout << "Circle with radius: " << radius << std::endl;
+    std::cout << "Circle with radius " << radius << ", Area: " << calculateArea() << std::endl;
 }
 
 double Circle::calculateArea() const {
@@ -12,12 +14,12 @@ double Circle::calculateArea() const {
 }
 
 void Circle::saveToFile(std::ofstream& file) const {
-    file.write(reinterpret_cast<const char*>(&radius), sizeof(radius));
+    file << "Circle with radius " << radius << ", Area: " << calculateArea() << std::endl;
 }
 
 std::unique_ptr<Figure> Circle::loadFromFile(std::ifstream& file) {
     double loadedRadius;
-    file.read(reinterpret_cast<char*>(&loadedRadius), sizeof(loadedRadius));
-
+    file >> loadedRadius;
     return std::make_unique<Circle>(loadedRadius);
 }
+

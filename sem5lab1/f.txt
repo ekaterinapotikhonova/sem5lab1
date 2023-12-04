@@ -1,0 +1,4 @@
+Total Figures: 1
+Figure 1:
+Rectangle with sides 5 and 5, Area: 25
+

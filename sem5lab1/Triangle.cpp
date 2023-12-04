@@ -4,7 +4,7 @@
 Triangle::Triangle(double b, double h) : base(b), height(h) {}
 
 void Triangle::printInfo() const {
-    std::cout << "Triangle with base: " << base << " and height: " << height << std::endl;
+    std::cout << "Triangle with base " << base << " and height " << height << ", Area: " << calculateArea() << std::endl;
 }
 
 double Triangle::calculateArea() const {
@@ -12,8 +12,7 @@ double Triangle::calculateArea() const {
 }
 
 void Triangle::saveToFile(std::ofstream& file) const {
-    file.write(reinterpret_cast<const char*>(&base), sizeof(base));
-    file.write(reinterpret_cast<const char*>(&height), sizeof(height));
+    file << "Triangle with base " << base << " and height " << height << ", Area: " << calculateArea() << std::endl;
 }
 
 std::unique_ptr<Figure> Triangle::loadFromFile(std::ifstream& file) {
