@@ -5,10 +5,12 @@
 
 class Triangle : public FlatFigure {
 private:
-    double base, height;
+    double sideA, sideB, sideC;
 
 public:
-    Triangle(double b, double h);
+    Triangle(double a, double b, double c);
+
+    bool isValidTriangle() const;
 
     void printInfo() const override;
     double calculateArea() const override;

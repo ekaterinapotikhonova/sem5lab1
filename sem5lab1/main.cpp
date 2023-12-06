@@ -6,6 +6,7 @@
 #include "Cone.h"
 #include "Keeper.h"
 #include <iostream>
+//#include "Triangle.cpp"
 
 // Функция для ввода целого числа с проверкой корректности ввода
 int getIntInput() {
@@ -24,7 +25,6 @@ int getIntInput() {
     }
 }
 
-// Функция для ввода вещественного числа с проверкой корректности ввода
 double getDoubleInput() {
     double input;
     while (true) {
@@ -97,12 +97,8 @@ int main() {
                 }
 
                 case 3: {
-                    double base, height;
-                    std::cout << "Enter the base of the triangle: ";
-                    base = getDoubleInput();
-                    std::cout << "Enter the height of the triangle: ";
-                    height = getDoubleInput();
-                    auto triangle = std::make_unique<Rectangle>(base, height);
+                    double sideA, sideB, sideC;
+                    auto triangle = std::make_unique<Triangle>(sideA, sideB, sideC);
                     std::cout << "Area of the triangle: " << triangle->calculateArea() << std::endl;
                     keeper.addFigure(std::move(triangle));
                     break;
